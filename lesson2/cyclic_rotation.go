@@ -1,4 +1,4 @@
-package solution
+package main
 
 func Solution(A []int, K int) []int {
 	lenA := len(A)

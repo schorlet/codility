@@ -1,4 +1,4 @@
-package solution
+package main
 
 func Solution(A []int) int {
 	m := make(map[int]bool, (len(A)/2)+1)

@@ -1,4 +1,4 @@
-package solution
+package main
 
 func Solution(X int, Y int, D int) int {
 	jumps := (Y - X) / D
