@@ -39,12 +39,12 @@ func perfTest() {
 
 	ticker := time.NewTicker(100 * time.Millisecond)
 	select {
-		case <-done:
-			ticker.Stop()
-			fmt.Println("ok")
-		case <-ticker.C:
-			<-done
-			fmt.Printf("timeout: %s\n", time.Since(start))
+	case <-done:
+		ticker.Stop()
+		fmt.Printf("ok: %s\n", time.Since(start))
+	case <-ticker.C:
+		<-done
+		fmt.Printf("timeout: %s\n", time.Since(start))
 	}
 }
 
@@ -53,17 +53,21 @@ func Solution(N int, A []int) []int {
 	start, max := 0, 0
 	for _, a := range A {
 		if a == N+1 {
-			B = make([]int, N+1)
 			start = max
 			continue
 		}
+		if B[a] < start {
+			B[a] = start
+		}
 		B[a] += 1
-		if B[a]+start > max {
-			max = B[a]+start
+		if B[a] > max {
+			max = B[a]
 		}
 	}
 	for i := range B {
-		B[i] += start
+		if B[i] < start {
+			B[i] = start
+		}
 	}
 	return B[1:]
 }
